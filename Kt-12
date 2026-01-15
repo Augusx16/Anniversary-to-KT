@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <title>Happy Anniversary ❤️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(12px);
+      border-radius: 24px;
+      padding: 30px;
+      max-width: 420px;
+      width: 90%;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      text-align: center;
+      animation: fadeIn 1.5s ease;
+      position: relative;
+      z-index: 2;
+    }
+
+    h1 { color: #ff4d6d; }
+
+    .date {
+      font-size: 14px;
+      color: #777;
+      margin-bottom: 20px;
+    }
+
+    p { line-height: 1.7; }
+
+    .heart img {
+      width: 80px;
+      animation: beat 1s infinite;
+    }
+
+    button {
+      background: #ff4d6d;
+      border: none;
+      border-radius: 30px;
+      padding: 12px 25px;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    button:hover { background: #e63b5f; }
+
+    .hidden-message {
+      display: none;
+      margin-top: 20px;
+      font-weight: bold;
+      color: #ff4d6d;
+    }
+
+    .glow {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(255,255,255,0.35), transparent 60%);
+      filter: blur(60px);
+      z-index: 1;
+    }
+
+    .glow.one { top: -100px; left: -100px; }
+    .glow.two { bottom: -120px; right: -120px; }
+
+    .floating-hearts {
+      pointer-events: none;
+    }
+
+    .floating-hearts span {
+      position: absolute;
+      bottom: -50px;
+      font-size: 24px;
+      animation: floatUp 8s linear infinite;
+      opacity: 0.6;
+    }
+
+    .safe { display: none; margin-top: 20px; }
+
+    .safe input {
+      padding: 10px;
+      font-size: 18px;
+      text-align: center;
+      border-radius: 12px;
+      border: 1px solid #ddd;
+      width: 120px;
+      margin: 10px auto;
+      display: block;
+    }
+
+    .error {
+      display: none;
+      color: #ff4d6d;
+      margin-top: 10px;
+    }
+
+    .firework {
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      font-size: 24px;
+      pointer-events: none;
+      animation: explode 1.2s ease-out forwards;
+    }
+
+    @keyframes beat {
+      0%,100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(0); opacity: 0; }
+      to { transform: translateY(-110vh); opacity: 1; }
+    }
+
+    @keyframes explode {
+      from { transform: scale(0); opacity: 1; }
+      to { transform: scale(1.5) translate(var(--x), var(--y)); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="glow one"></div>
+  <div class="glow two"></div>
+
+  <div class="floating-hearts">
+    <span style="left:10%">💖</span>
+    <span style="left:30%; animation-delay:2s">💗</span>
+    <span style="left:50%; animation-delay:4s">💕</span>
+    <span style="left:70%; animation-delay:1s">❤️</span>
+    <span style="left:90%; animation-delay:3s">💘</span>
+  </div>
+
+  <div class="card">
+    <h1>สุขสันต์วันครบรอบ 2 ปีของเรา</h1>
+    <div class="date">💑 ครบรอบของเรา</div>
+
+    <div class="heart">
+      <img src="mylove.jpg" alt="love" />
+    </div>
+
+    <p>
+      ถึง <strong>KT my love</strong><br />
+      ขอบคุณที่ยังอยู่ด้วยกัน ในทุกช่วงเวลาที่ยากลำบาก
+      ไม่มีอะไรมาก ก็รู้อยู่ว่ารัก บอกทุกวัน อยู่ด้วยกันไปนานๆน้าา
+      มีเกมให้เล่นเล็กๆ ข้างล่าง ใบ้ให้ 
+    </p>
+
+    <button onclick="openSafe()">🔐 ตู้เซฟความลับ</button>
+
+    <div class="safe" id="safe">
+      <p>🔢 ใส่รหัสลับ (4 ตัว)</p>
+      <input type="password" id="code" maxlength="4" />
+      <button onclick="unlockSafe()">เปิดตู้เซฟ</button>
+      <div class="error" id="error">ทำไมจำไม่ได้ 🥺</div>
+    </div>
+
+    <div class="hidden-message" id="secret">
+      ลองเปิดดูใต้หมอนเค้าจิ 💕<br />
+      จาก <strong>นายโจ</strong>
+    </div>
+  </div>
+
+  <script>
+    function openSafe() {
+      document.getElementById('safe').style.display = 'block';
+    }
+
+    function unlockSafe() {
+      const correctCode = '6533';
+      const input = document.getElementById('code').value;
+
+      if (input === correctCode) {
+        document.getElementById('safe').style.display = 'none';
+        document.getElementById('secret').style.display = 'block';
+        launchFireworks();
+      } else {
+        document.getElementById('error').style.display = 'block';
+      }
+    }
+
+    function launchFireworks() {
+      for (let i = 0; i < 20; i++) {
+        const fw = document.createElement('div');
+        fw.className = 'firework';
+        fw.textContent = '💖';
+        fw.style.setProperty('--x', `${(Math.random() - 0.5) * 300}px`);
+        fw.style.setProperty('--y', `${(Math.random() - 0.5) * 300}px`);
+        document.body.appendChild(fw);
+        setTimeout(() => fw.remove(), 1200);
+      }
+    }
+    
+  </script>
+</body>
+</html>
